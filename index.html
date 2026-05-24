@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediaHub | Portal Berita Nasional</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid #e2e8f0;
+            height: 70px;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: #0f172a;
+        }
+
+        .brand span {
+            color: #10b981;
+        }
+
+        .nav-info {
+            font-size: 12px;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        .hero {
+            background-color: #ffffff;
+            padding: 60px 24px 40px 24px;
+            text-align: center;
+        }
+
+        .hero-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(to right, #10b981, #059669);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: #64748b;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* ==========================================
+           STYLE UNTUK AREA IKLAN BANNER
+           ========================================== */
+        .ads-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .space-iklan {
+            width: 100%;
+            max-width: 728px; /* Standar ukuran banner leaderboard */
+            margin: 10px auto 0 auto;
+            background-color: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .main-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        .category-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .title-indicator {
+            width: 6px;
+            height: 22px;
+            background-color: #10b981;
+            border-radius: 4px;
+        }
+
+        .category-title h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .grid-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            .hero h1 {
+                font-size: 48px;
+            }
+        }
+
+        .grid-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 32px 20px;
+            text-decoration: none;
+            position: relative;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+            transition: all 0.2s ease-in-out;
+        }
+
+        .logo-wrapper {
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            width: 100%;
+        }
+
+        .logo-wrapper img {
+            max-height: 100%;
+            max-width: 85%;
+            object-fit: contain;
+            transition: transform 0.2s ease;
+        }
+
+        .grid-item span {
+            font-size: 13px;
+            font-weight: 700;
+            color: #475569;
+            transition: color 0.2s ease;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        .grid-item:hover {
+         transform: translateY(-5px);
+         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+         border-color: #0f172a;
+        }
+
+        .grid-item:hover span {
+         color: #0f172a;
+        }
+
+        /* Style Footer Multi-Kolom */
+        .main-footer {
+            background-color: #ffffff;
+            border-top: 1px solid #e2e8f0;
+            padding: 60px 24px 30px 24px;
+            margin-top: 40px;
+        }
+
+        .footer-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr; /* Default di HP: 1 kolom memanjang ke bawah */
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        /* Desktop View: Berubah jadi 3 kolom ke samping */
+        @media (min-width: 768px) {
+            .footer-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .footer-col h3 {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #0f172a;
+            margin-bottom: 16px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            font-size: 14px;
+            color: #64748b;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        /* Efek Hover teks footer jadi hitam pekat */
+        .footer-col ul li a:hover {
+            color: #0f172a;
+        }
+
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 30px auto 0 auto;
+            text-align: center;
+            font-size: 12px;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        .footer {
+            background-color: #ffffff;
+            border-top: 1px solid #e2e8f0;
+            padding: 32px 24px;
+            text-align: center;
+            font-size: 12px;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="brand">Media<span>Hub</span></div>
+            <div class="nav-info">Direktori Akses Cepat</div>
+        </div>
+    </nav>
+
+    <!-- 2. HERO -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1>Pilih Gerbang <span>Informasi Anda</span></h1>
+            <p>Akses langsung ke halaman utama situs berita terpercaya di Indonesia dalam satu ketukan pintar.</p>
+        </div>
+    </section>
+
+    <!-- ZONE IKLAN (Tempat Nyari Duit) -->
+    <div class="ads-container">
+        <div class="space-iklan">
+            <!-- Kalau nanti pasang AdSense, tinggal paste kode script dari Google di dalam sini -->
+            SPACE IKLAN BANNER (ADSENSE / SPONSOR)
+        </div>
+    </div>
+
+    <!-- 3. MAIN DASHBOARD GRID -->
+    <main class="main-content">
+        <div class="category-title">
+            <div class="title-indicator"></div>
+            <h2>Pilih Media Berita</h2>
+        </div>
+
+        <div class="grid-container">
+
+            <!-- ITEM 1 -->
+            <a href="https://www.antaranews.com/" target="_blank" rel="noopener noreferrer" class="grid-item item-news">
+                <div class="logo-wrapper">
+                    <img src="https://www.antaranews.com/img/logo.png" alt="Antara News Logo">
+                </div>
+                <span>Antara News</span>
+            </a>
+
+            <!-- ITEM 2 -->
+            <a href="https://www.cnnindonesia.com/" target="_blank" rel="noopener noreferrer" class="grid-item item-cnn">
+                <div class="logo-wrapper">
+                    <img src="https://cdn.cnnindonesia.com/cnnid/images/logo_cnn_fav.png?v=9.3.1" alt="CNN Indonesia Logo" style="max-height: 45px;">
+                </div>
+                <span>CNN Indonesia</span>
+            </a>
+
+            <!-- ITEM 3 -->
+            <a href="https://www.tempo.co/" target="_blank" rel="noopener noreferrer" class="grid-item item-tempo">
+                <div class="logo-wrapper">
+                    <img src="https://www.tempo.co/assets/img/logo-tempo.png" alt="Tempo Logo">
+                </div>
+                <span>Tempo.co</span>
+            </a>
+
+            <!-- ITEM 4 -->
+            <a href="https://www.kompas.com/" target="_blank" rel="noopener noreferrer" class="grid-item item-kompas">
+                <div class="logo-wrapper">
+                    <img src="https://asset.kompas.com/data/2020/wp/images/logo-kompascom.png" alt="Kompas Logo">
+                </div>
+                <span>Kompas.com</span>
+            </a>
+            <!-- ITEM 5 -->
+            <a href="https://www.detik.com/" target="_blank" rel="noopener noreferrer" class="grid-item item-detik">
+                <div class="logo-wrapper">
+                    <img src="https://cdn.detik.net.id/detikcom/images/logo.png" alt="Detik Logo">
+                </div>
+                <span>Detikcom</span>
+            </a>
+
+            <!-- ITEM 6 -->
+            <a href="https://www.liputan6.com/" target="_blank" rel="noopener noreferrer" class="grid-item item-liputan6">
+                <div class="logo-wrapper">
+                    <img src="https://cdn1-production-images-kly.akamaized.net/mG_mK7dshW_XG6XbZ_Y2P_Z-36A=/assets/images/brands/liputan6.svg" alt="Liputan6 Logo">
+                </div>
+                <span>Liputan6.com</span>
+            </a>
+
+            <!-- ITEM 7 -->
+            <a href="https://www.merdeka.com/" target="_blank" rel="noopener noreferrer" class="grid-item item-merdeka">
+                <div class="logo-wrapper">
+                    <img src="https://cdns.klimg.com/merdeka.com/v2/i/m/logo/logo-mdk-news.png" alt="Merdeka Logo">
+                </div>
+                <span>Merdeka.com</span>
+            </a>
+
+            <!-- ITEM 8 -->
+            <a href="https://tirto.id/" target="_blank" rel="noopener noreferrer" class="grid-item item-tirto">
+                <div class="logo-wrapper">
+                    <img src="https://cdn.tirto.id/images/logo-tirto-blue.svg" alt="Tirto Logo">
+                </div>
+                <span>Tirto.id</span>
+            </a>
+
+            <!-- ITEM 9 -->
+            <a href="https://www.suara.com/" target="_blank" rel="noopener noreferrer" class="grid-item item-suara">
+                <div class="logo-wrapper">
+                    <img src="https://www.suara.com/assets/images/logo.png" alt="Suara Logo">
+                </div>
+                <span>Suara.com</span>
+            </a>
+
+            <!-- ITEM 10 -->
+            <a href="https://kumparan.com/" target="_blank" rel="noopener noreferrer" class="grid-item item-kumparan">
+                <div class="logo-wrapper">
+                    <img src="https://kumparan.com/images/logo-kumparan.svg" alt="Kumparan Logo" style="max-height: 35px;">
+                </div>
+                <span>Kumparan</span>
+            </a>
+
+        </div>
+    </main>
+
+    <!-- 4. FOOTER -->
+    <!-- ==========================================
+         FOOTER MULTI-KOLOM (DOMAIN UPDATE)
+         ========================================== -->
+    <footer class="main-footer">
+        <div class="footer-container">
+
+            <!-- KOLOM 1: LAYANAN -->
+            <div class="footer-col">
+                <h3>Layanan</h3>
+                <ul>
+                    <li><a href="https://rumahwebstudio.my.id/" target="_blank" rel="noopener noreferrer">Jasa Pembuatan Web</a></li>
+                    <li><a href="https://rumahwebstudio.my.id/" target="_blank" rel="noopener noreferrer">Desain UI/UX Landing Page</a></li>
+                    <li><a href="https://rumahwebstudio.my.id/" target="_blank" rel="noopener noreferrer">Optimasi Performa Web</a></li>
+                    <li><a href="https://rumahwebstudio.my.id/" target="_blank" rel="noopener noreferrer">Perawatan Website</a></li>
+                </ul>
+            </div>
+
+            <!-- KOLOM 2: KONTAK -->
+            <div class="footer-col">
+                <h3>Kontak</h3>
+                <ul>
+                    <li><a href="https://wa.me/6283159448087" target="_blank" rel="noopener noreferrer">WhatsApp Bisnis</a></li>
+                    <li><a href=>Email RumahWeb(maintenance)</a></li>
+                    <li><a href="mailto:mediahub.index@gmail.com">Email MediaHub (maintenance)</a></li>
+                </ul>
+            </div>
+
+            <!-- KOLOM 3: MEDIA SOSIAL -->
+            <div class="footer-col">
+                <h3>Media Sosial</h3>
+                <ul>
+                    <li><a href="https://instagram.com/rumahweb.id" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Bagian hak cipta paling bawah -->
+        <div class="footer-bottom">
+            <p>&copy; 2026 <strong>MediaHub</strong> by <a href="https://rumahwebstudio.my.id/" target="_blank" rel="noopener noreferrer" style="color: #40E0D0; text-decoration: none; font-weight: 700;">RumahWeb Studio</a>. Seluruh hak cipta logo milik masing-masing penerbit resmi.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
