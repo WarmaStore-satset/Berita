@@ -91,27 +91,26 @@
             line-height: 1.6;
         }
 
-        /* ==========================================
-           STYLE UNTUK AREA IKLAN BANNER
-           ========================================== */
         .ads-container {
             max-width: 1100px;
             margin: 0 auto;
             padding: 0 24px;
         }
 
-        .space-iklan {
+        /* Style Banner Iklan Mandiri RumahWeb Studio */
+        .banner-iklan {
             width: 100%;
-            max-width: 728px; /* Standar ukuran banner leaderboard */
+            max-width: 728px;
+            height: auto;
+            display: block;
             margin: 10px auto 0 auto;
-            background-color: #f1f5f9;
-            border: 2px dashed #cbd5e1;
             border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            color: #94a3b8;
-            font-size: 13px;
-            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease;
+        }
+
+        .banner-iklan:hover {
+            transform: scale(1.01);
         }
 
         .main-content {
@@ -195,22 +194,18 @@
             transition: color 0.2s ease;
         }
 
+        /* EFEK HOVER GLOBAL - SEMUA JADI HITAM PEKAT */
         .grid-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.04);
-        }
-
-        .grid-item:hover {
-         transform: translateY(-5px);
-         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-         border-color: #0f172a;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            border-color: #0f172a;
         }
 
         .grid-item:hover span {
-         color: #0f172a;
+            color: #0f172a;
         }
 
-        /* Style Footer Multi-Kolom */
+        /* Style Footer Multi-Kolom Rata Kiri */
         .main-footer {
             background-color: #ffffff;
             border-top: 1px solid #e2e8f0;
@@ -222,13 +217,12 @@
             max-width: 1100px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr; /* Default di HP: 1 kolom memanjang ke bawah */
+            grid-template-columns: 1fr;
             gap: 40px;
             padding-bottom: 40px;
             border-bottom: 1px solid #f1f5f9;
         }
 
-        /* Desktop View: Berubah jadi 3 kolom ke samping */
         @media (min-width: 768px) {
             .footer-container {
                 grid-template-columns: repeat(3, 1fr);
@@ -259,7 +253,6 @@
             transition: color 0.2s ease;
         }
 
-        /* Efek Hover teks footer jadi hitam pekat */
         .footer-col ul li a:hover {
             color: #0f172a;
         }
@@ -271,15 +264,6 @@
             font-size: 12px;
             color: #94a3b8;
             line-height: 1.6;
-        }
-
-        .footer {
-            background-color: #ffffff;
-            border-top: 1px solid #e2e8f0;
-            padding: 32px 24px;
-            text-align: center;
-            font-size: 12px;
-            color: #94a3b8;
         }
     </style>
 </head>
@@ -301,15 +285,15 @@
         </div>
     </section>
 
-    <!-- ZONE IKLAN (Tempat Nyari Duit) -->
+    <!-- 3. ZONE IKLAN MANDIRI (Mengarahkan ke RumahWeb Studio) -->
     <div class="ads-container">
-        <div class="space-iklan">
-            <!-- Kalau nanti pasang AdSense, tinggal paste kode script dari Google di dalam sini -->
-            SPACE IKLAN BANNER (ADSENSE / SPONSOR)
-        </div>
+        <a href="https://rumahwebstudio.my.id/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: block;">
+            <!-- Pastikan nama file banner-rumahweb.png disesuaikan jika berbeda -->
+            <img src="banner-rumahweb.png" alt="Iklan Jasa RumahWeb" class="banner-iklan">
+        </a>
     </div>
 
-    <!-- 3. MAIN DASHBOARD GRID -->
+    <!-- 4. MAIN DASHBOARD GRID (10 KOTAK MEDIA) -->
     <main class="main-content">
         <div class="category-title">
             <div class="title-indicator"></div>
@@ -317,80 +301,81 @@
         </div>
 
         <div class="grid-container">
-
-            <!-- ITEM 1 -->
-            <a href="https://www.antaranews.com/" target="_blank" rel="noopener noreferrer" class="grid-item item-news">
+            
+            <!-- ITEM 1: ANTARA -->
+            <a href="https://www.antaranews.com/" target="_blank" rel="noopener noreferrer" class="grid-item">
                 <div class="logo-wrapper">
                     <img src="https://www.antaranews.com/img/logo.png" alt="Antara News Logo">
                 </div>
                 <span>Antara News</span>
             </a>
 
-            <!-- ITEM 2 -->
-            <a href="https://www.cnnindonesia.com/" target="_blank" rel="noopener noreferrer" class="grid-item item-cnn">
+            <!-- ITEM 2: CNN INDONESIA -->
+            <a href="https://www.cnnindonesia.com/" target="_blank" rel="noopener noreferrer" class="grid-item">
                 <div class="logo-wrapper">
                     <img src="https://cdn.cnnindonesia.com/cnnid/images/logo_cnn_fav.png?v=9.3.1" alt="CNN Indonesia Logo" style="max-height: 45px;">
                 </div>
                 <span>CNN Indonesia</span>
             </a>
 
-            <!-- ITEM 3 -->
-            <a href="https://www.tempo.co/" target="_blank" rel="noopener noreferrer" class="grid-item item-tempo">
+            <!-- ITEM 3: TEMPO -->
+            <a href="https://www.tempo.co/" target="_blank" rel="noopener noreferrer" class="grid-item">
                 <div class="logo-wrapper">
                     <img src="https://www.tempo.co/assets/img/logo-tempo.png" alt="Tempo Logo">
                 </div>
                 <span>Tempo.co</span>
             </a>
 
-            <!-- ITEM 4 -->
-            <a href="https://www.kompas.com/" target="_blank" rel="noopener noreferrer" class="grid-item item-kompas">
+            <!-- ITEM 4: KOMPAS -->
+            <a href="https://www.kompas.com/" target="_blank" rel="noopener noreferrer" class="grid-item">
                 <div class="logo-wrapper">
                     <img src="https://asset.kompas.com/data/2020/wp/images/logo-kompascom.png" alt="Kompas Logo">
                 </div>
                 <span>Kompas.com</span>
             </a>
-            <!-- ITEM 5 -->
-            <a href="https://www.detik.com/" target="_blank" rel="noopener noreferrer" class="grid-item item-detik">
+
+            <!-- ITEM 5: DETIKCOM -->
+            <a href="https://www.detik.com/" target="_blank" rel="noopener noreferrer" class="grid-item">
                 <div class="logo-wrapper">
                     <img src="https://cdn.detik.net.id/detikcom/images/logo.png" alt="Detik Logo">
                 </div>
                 <span>Detikcom</span>
             </a>
 
-            <!-- ITEM 6 -->
-            <a href="https://www.liputan6.com/" target="_blank" rel="noopener noreferrer" class="grid-item item-liputan6">
+            <!-- ITEM 6: LIPUTAN6 -->
+            <a href="https://www.liputan6.com/" target="_blank" rel="noopener noreferrer" class="grid-item">
                 <div class="logo-wrapper">
                     <img src="https://cdn1-production-images-kly.akamaized.net/mG_mK7dshW_XG6XbZ_Y2P_Z-36A=/assets/images/brands/liputan6.svg" alt="Liputan6 Logo">
                 </div>
                 <span>Liputan6.com</span>
             </a>
 
-            <!-- ITEM 7 -->
-            <a href="https://www.merdeka.com/" target="_blank" rel="noopener noreferrer" class="grid-item item-merdeka">
+            <!-- ITEM 7: MERDEKA -->
+            <a href="https://www.merdeka.com/" target="_blank" rel="noopener noreferrer" class="grid-item">
                 <div class="logo-wrapper">
                     <img src="https://cdns.klimg.com/merdeka.com/v2/i/m/logo/logo-mdk-news.png" alt="Merdeka Logo">
                 </div>
                 <span>Merdeka.com</span>
             </a>
 
-            <!-- ITEM 8 -->
-            <a href="https://tirto.id/" target="_blank" rel="noopener noreferrer" class="grid-item item-tirto">
+            <!-- ITEM 8: TIRTO.ID -->
+            <a href="https://tirto.id/" target="_blank" rel="noopener noreferrer" class="grid-item">
                 <div class="logo-wrapper">
                     <img src="https://cdn.tirto.id/images/logo-tirto-blue.svg" alt="Tirto Logo">
                 </div>
                 <span>Tirto.id</span>
             </a>
 
-            <!-- ITEM 9 -->
-            <a href="https://www.suara.com/" target="_blank" rel="noopener noreferrer" class="grid-item item-suara">
+            <!-- ITEM 9: SUARA.COM -->
+            <a href="https://www.suara.com/" target="_blank" rel="noopener noreferrer" class="grid-item">
                 <div class="logo-wrapper">
                     <img src="https://www.suara.com/assets/images/logo.png" alt="Suara Logo">
                 </div>
                 <span>Suara.com</span>
             </a>
 
-            <!-- ITEM 10 -->
-            <a href="https://kumparan.com/" target="_blank" rel="noopener noreferrer" class="grid-item item-kumparan">
+            <!-- ITEM 10: KUMPARAN -->
+            <a href="https://kumparan.com/" target="_blank" rel="noopener noreferrer" class="grid-item">
                 <div class="logo-wrapper">
                     <img src="https://kumparan.com/images/logo-kumparan.svg" alt="Kumparan Logo" style="max-height: 35px;">
                 </div>
@@ -400,14 +385,43 @@
         </div>
     </main>
 
-    <!-- 4. FOOTER -->
-    <!-- ==========================================
-         FOOTER MULTI-KOLOM (DOMAIN UPDATE)
-         ========================================== -->
+    <!-- 5. ZONE KOMENTAR DISQUS (SUDAH TERINTEGRASI SHORTNAME) -->
+    <section style="max-width: 750px; margin: 40px auto; padding: 0 24px;">
+        <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 32px;">
+            
+            <h3 style="font-size: 18px; font-weight: 700; color: #1e293b; margin-bottom: 8px; text-align: center;">
+                Diskusi & Request Media
+            </h3>
+            <p style="font-size: 13px; color: #64748b; text-align: center; margin-bottom: 32px;">
+                Mau request situs berita lain atau mau ngobrol? Tulis di kolom komentar bawah ya!
+            </p>
+
+            <div id="disqus_thread"></div>
+            
+            <script>
+                var disqus_config = function () {
+                    this.page.url = window.location.href;  
+                    this.page.identifier = window.location.pathname; 
+                };
+
+                (function() { 
+                    var d = document, s = d.createElement('script');
+                    // Pakai shortname lo: mediahubindonesia
+                    s.src = 'https://mediahubindonesia.disqus.com/embed.js'; 
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+        </div>
+    </section>
+
+    <!-- 6. FOOTER MULTI-KOLOM (RATA KIRI & LINK DOMAIN BARU) -->
     <footer class="main-footer">
         <div class="footer-container">
-
-            <!-- KOLOM 1: LAYANAN -->
+            
+            <!-- KOLOM 1 -->
             <div class="footer-col">
                 <h3>Layanan</h3>
                 <ul>
@@ -418,29 +432,29 @@
                 </ul>
             </div>
 
-            <!-- KOLOM 2: KONTAK -->
+            <!-- KOLOM 2 -->
             <div class="footer-col">
                 <h3>Kontak</h3>
                 <ul>
                     <li><a href="https://wa.me/6283159448087" target="_blank" rel="noopener noreferrer">WhatsApp Bisnis</a></li>
-                    <li><a href=>Email RumahWeb(maintenance)</a></li>
-                    <li><a href="mailto:mediahub.index@gmail.com">Email MediaHub (maintenance)</a></li>
+                    <li><a href="mailto:">Email Jasa (maintenance)</a></li>
+                    <li><a href="mailto:.com">Email MediaHub (maintenance)</a></li>
                 </ul>
             </div>
 
-            <!-- KOLOM 3: MEDIA SOSIAL -->
+            <!-- KOLOM 3 -->
             <div class="footer-col">
                 <h3>Media Sosial</h3>
                 <ul>
                     <li><a href="https://instagram.com/rumahweb.id" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                    <li><a href="https://www.facebook.com/share/1BSfoQeHgv/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
                 </ul>
             </div>
 
         </div>
 
-        <!-- Bagian hak cipta paling bawah -->
         <div class="footer-bottom">
-            <p>&copy; 2026 <strong>MediaHub</strong> by <a href="https://rumahwebstudio.my.id/" target="_blank" rel="noopener noreferrer" style="color: #40E0D0; text-decoration: none; font-weight: 700;">RumahWeb Studio</a>. Seluruh hak cipta logo milik masing-masing penerbit resmi.</p>
+            <p>&copy; 2026 <strong>MediaHub</strong> by <a href="https://rumahwebstudio.my.id/" target="_blank" rel="noopener noreferrer" style="color: #10b981; text-decoration: none; font-weight: 700;">RumahWeb Studio</a>. Seluruh hak cipta logo milik masing-masing penerbit resmi.</p>
         </div>
     </footer>
 
