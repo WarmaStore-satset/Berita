@@ -266,6 +266,10 @@
             line-height: 1.6;
         }
     </style>
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    
+
 </head>
 <body>
 
@@ -287,9 +291,20 @@
 
     <!-- 3. ZONE IKLAN -->
     <div class="ads-container">
- <a href="https://rumahwebstudio.my.id/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: block;">
-            <img src="IklanB.png" alt="Iklan Jasa RumahWeb Studio" class="banner-iklan">
-        </a>
+        <div class="swiper" style="border-radius: 12px; overflow: hidden; margin-top: 10px;">
+            <div class="swiper-wrapper">
+                <!-- Banner 1 -->
+                <div class="swiper-slide">
+                    <a href="https://rumahwebstudio.my.id/"><img src="IklanB.png" style="width:100%; display:block;"></a>
+                </div>
+                <!-- Banner 2 (Tinggal copy paste jika punya banner lain) -->
+                <div class="swiper-slide">
+                    <a href="https://rumahwebstudio.my.id/"><txt src="Dana Kaget" style="width:100%; display:block;"></a>
+                </div>
+            </div>
+            <!-- Pagination (titik di bawah) -->
+            <div class="swiper-pagination"></div>
+        </div>
     </div>
 
     <!-- 4. MAIN DASHBOARD GRID (10 KOTAK MEDIA) -->
@@ -447,4 +462,15 @@
     </footer>
 
 </body>
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  const swiper = new Swiper('.swiper', {
+    loop: true,
+    autoplay: { delay: 3000, disableOnInteraction: false },
+    pagination: { el: '.swiper-pagination', clickable: true },
+  });
+</script>
+    
+    
 </html>
