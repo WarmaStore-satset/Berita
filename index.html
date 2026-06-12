@@ -265,22 +265,9 @@
             color: #94a3b8;
             line-height: 1.6;
         }
-
-        .swiper-pagination {
-    bottom: 0 !important;
-        }
-
-        .swiper-pagination-bullet-active {
-    background: #10b981 !important;
-        }
-
-        .swiper-pagination-bullet {
-    background: #94a3b8;
-        }
     </style>
 <!-- Swiper CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-    
 
 </head>
 <body>
@@ -301,7 +288,8 @@
         </div>
     </section>
 
-    <!-- 3. ZONE IKLAN -->
+    <!-- 3. ZONE IKLAN MANDIRI (Mengarahkan ke RumahWeb Studio) -->
+    <!-- ZONA IKLAN SLIDER -->
     <div class="ads-container">
         <div class="swiper" style="border-radius: 12px; overflow: hidden; margin-top: 10px;">
             <div class="swiper-wrapper">
@@ -309,14 +297,16 @@
                 <div class="swiper-slide">
                     <a href="https://rumahwebstudio.my.id/"><img src="IklanB.png" style="width:100%; display:block;"></a>
                 </div>
-                <!-- Banner 2 -->
+                <!-- Banner 2 (Tinggal copy paste jika punya banner lain) -->
                 <div class="swiper-slide">
                     <a href="https://rumahwebstudio.my.id/"><img src="IklanB.png" style="width:100%; display:block;"></a>
                 </div>
+            </div>
             <!-- Pagination (titik di bawah) -->
             <div class="swiper-pagination"></div>
         </div>
     </div>
+
 
     <!-- 4. MAIN DASHBOARD GRID (10 KOTAK MEDIA) -->
     <main class="main-content">
@@ -325,84 +315,15 @@
             <h2>Pilih Media Berita</h2>
         </div>
 
-        <div class="grid-container">
-            <a href="https://www.antaranews.com/" target="_blank" rel="noopener noreferrer" class="grid-item">
-                <div class="logo-wrapper">
-                    <img src="antara.png" alt="Antara News Logo">
-                </div>
-                <span>Antara News</span>
-            </a>
+<div class="grid-container" id="media-grid">
+</div>
 
-            <a href="https://www.cnnindonesia.com/" target="_blank" rel="noopener noreferrer" class="grid-item">
-                <div class="logo-wrapper">
-                    <img src="cnn.png" alt="CNN Indonesia Logo" style="max-height: 45px;">
-                </div>
-                <span>CNN Indonesia</span>
-            </a>
-
-            <a href="https://www.tempo.co/" target="_blank" rel="noopener noreferrer" class="grid-item">
-                <div class="logo-wrapper">
-                    <img src="tempo.webp" alt="Tempo Logo">
-                </div>
-                <span>Tempo.co</span>
-            </a>
-
-            <a href="https://www.kompas.com/" target="_blank" rel="noopener noreferrer" class="grid-item">
-                <div class="logo-wrapper">
-                    <img src="kompas.png" alt="Kompas Logo">
-                </div>
-                <span>Kompas.com</span>
-            </a>
-
-            <a href="https://www.detik.com/" target="_blank" rel="noopener noreferrer" class="grid-item">
-                <div class="logo-wrapper">
-                    <img src="detik.png" alt="Detik Logo">
-                </div>
-                <span>Detikcom</span>
-            </a>
-
-            <a href="https://www.liputan6.com/" target="_blank" rel="noopener noreferrer" class="grid-item">
-                <div class="logo-wrapper">
-                    <img src="liputan.png" alt="Liputan6 Logo">
-                </div>
-                <span>Liputan6.com</span>
-            </a>
-
-            <a href="https://www.merdeka.com/" target="_blank" rel="noopener noreferrer" class="grid-item">
-                <div class="logo-wrapper">
-                    <img src="merdeka.png" alt="Merdeka Logo">
-                </div>
-                <span>Merdeka.com</span>
-            </a>
-
-            <a href="https://tirto.id/" target="_blank" rel="noopener noreferrer" class="grid-item">
-                <div class="logo-wrapper">
-                    <img src="tirto.jpeg" alt="Tirto Logo">
-                </div>
-                <span>Tirto.id</span>
-            </a>
-
-            <a href="https://www.suara.com/" target="_blank" rel="noopener noreferrer" class="grid-item">
-                <div class="logo-wrapper">
-                    <img src="suara.png" alt="Suara Logo">
-                </div>
-                <span>Suara.com</span>
-            </a>
-
-            <a href="https://kumparan.com/" target="_blank" rel="noopener noreferrer" class="grid-item">
-                <div class="logo-wrapper">
-                    <img src="kumparan.webp" alt="Kumparan Logo" style="max-height: 25px;">
-                </div>
-                <span>Kumparan</span>
-            </a>
-
-        </div>
     </main>
 
     <!-- 5. ZONE KOMENTAR DISQUS (SUDAH TERINTEGRASI SHORTNAME) -->
     <section style="max-width: 750px; margin: 40px auto; padding: 0 24px;">
         <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 32px;">
-            
+
             <h3 style="font-size: 18px; font-weight: 700; color: #1e293b; margin-bottom: 8px; text-align: center;">
                 Diskusi & Request Media
             </h3>
@@ -411,17 +332,17 @@
             </p>
 
             <div id="disqus_thread"></div>
-            
+
             <script>
                 var disqus_config = function () {
-                    this.page.url = window.location.href;  
-                    this.page.identifier = window.location.pathname; 
+                    this.page.url = window.location.href;
+                    this.page.identifier = window.location.pathname;
                 };
 
-                (function() { 
+                (function() {
                     var d = document, s = d.createElement('script');
                     // Pakai shortname lo: mediahubindonesia
-                    s.src = 'https://mediahubindonesia.disqus.com/embed.js'; 
+                    s.src = 'https://mediahubindonesia.disqus.com/embed.js';
                     s.setAttribute('data-timestamp', +new Date());
                     (d.head || d.body).appendChild(s);
                 })();
@@ -434,7 +355,7 @@
     <!-- 6. FOOTER MULTI-KOLOM (RATA KIRI & LINK DOMAIN BARU) -->
     <footer class="main-footer">
         <div class="footer-container">
-            
+
             <!-- KOLOM 1 -->
             <div class="footer-col">
                 <h3>Layanan</h3>
@@ -442,7 +363,7 @@
                     <li><a href="https://rumahwebstudio.my.id/" target="_blank" rel="noopener noreferrer">Jasa Pembuatan Web</a></li>
                     <li><a href="https://rumahwebstudio.my.id/" target="_blank" rel="noopener noreferrer">Desain UI/UX Landing Page</a></li>
                     <li><a href="https://rumahwebstudio.my.id/" target="_blank" rel="noopener noreferrer">Optimasi Performa Web</a></li>
-                    <li><a href="https://rumahwebstudio.my.id/" target="_blank" rel="noopener noreferrer">Perawatan Website</a></li>
+                    <li><a href="https://rumahwebstudio.my.id/" target="_blank" rel="noopener noreferrer">Perawatan Website/Maintenance</a></li>
                 </ul>
             </div>
 
@@ -451,8 +372,7 @@
                 <h3>Kontak</h3>
                 <ul>
                     <li><a href="https://wa.me/6283159448087" target="_blank" rel="noopener noreferrer">WhatsApp Bisnis</a></li>
-                    <li><a href="mailto:">Email Jasa (maintenance)</a></li>
-                    <li><a href="mailto:.com">Email MediaHub (maintenance)</a></li>
+                    <li><a href="mailto:rumahwebstudio@gmail.com">Email RumahWeb Studio</a></li>
                 </ul>
             </div>
 
@@ -461,7 +381,7 @@
                 <h3>Media Sosial</h3>
                 <ul>
                     <li><a href="https://instagram.com/rumahweb.id" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-                    <li><a href="https://www.facebook.com/share/1BSfoQeHgv/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+                    <li><a href="https://www.facebook.com/share/1EgsS9cNZ3/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
                 </ul>
             </div>
 
@@ -471,8 +391,6 @@
             <p>&copy; 2026 <strong>MediaHub</strong> by <a href="https://rumahwebstudio.my.id/" target="_blank" rel="noopener noreferrer" style="color: #10b981; text-decoration: none; font-weight: 700;">RumahWeb Studio</a>. Seluruh hak cipta logo milik masing-masing penerbit resmi.</p>
         </div>
     </footer>
-
-</body>
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
@@ -482,6 +400,58 @@
     pagination: { el: '.swiper-pagination', clickable: true },
   });
 </script>
-    
-    
+
+<script>
+  (async function loadMedia() {
+    const container = document.getElementById('media-grid');
+    if (!container) return;
+
+    // Tampilkan loading dulu
+    container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:40px;">Memuat media...</div>';
+
+    const projectId = '95ioi1kk';   // dari sanity.config.ts
+    const dataset = 'production';
+    // Gunakan API version yang stabil
+    const apiVersion = '2021-10-21';
+
+    // GROQ query: ambil media aktif, urutkan berdasarkan 'urutan'
+    const query = `*[_type == "media" && aktif == true] | order(urutan asc) {
+      nama,
+      url,
+      "logo": logo.asset->url
+    }`;
+
+    const url = `https://${projectId}.api.sanity.io/v${apiVersion}/data/query/${dataset}?query=${encodeURIComponent(query)}`;
+
+    try {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const data = await response.json();
+      const mediaList = data.result;
+
+      if (!mediaList || mediaList.length === 0) {
+        container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:40px;">Belum ada media aktif.</div>';
+        return;
+      }
+
+      // Render media
+      container.innerHTML = mediaList.map(media => `
+        <a href="${media.url}"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="grid-item">
+          <div class="logo-wrapper">
+            <img src="${media.logo}" alt="${media.nama}" loading="lazy">
+          </div>
+          <span>${media.nama}</span>
+        </a>
+      `).join('');
+    } catch (error) {
+      console.error('Gagal mengambil media:', error);
+      container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:40px; color:red;">Gagal memuat data media. Cek koneksi atau konfigurasi Sanity.</div>';
+    }
+  })();
+</script>
+
+</body>
 </html>
