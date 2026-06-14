@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediaHub | Suara Publik</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 1. NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="brand">Media<span>Hub</span></div>
+            <div style="display: flex; gap: 16px; align-items: center;">
+                <a href="index.html" style="text-decoration: none; font-size: 14px; font-weight: 600; color: #64748b;">Direktori</a>
+                <a href="opini.html" style="text-decoration: none; font-size: 14px; font-weight: 700; color: #10b981;">Suara Publik</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. HERO SECTION -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1 style="font-size: 36px; font-weight: 800; color: #0f172a; margin-bottom: 16px; line-height: 1.2; text-align: center;">
+                Ruang Publik <span style="background: linear-gradient(to right, #10b981, #059669); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Opini & Statement</span>
+            </h1>
+            <p>Wadah kolaborasi untuk menyampaikan opini dan statement secara bebas dan bertanggung jawab.</p>
+        </div>
+    </section>
+
+    <!-- 3. MAIN CONTENT -->
+    <main class="main-content" style="max-width: 1200px; margin: 0 auto; padding: 24px; display: block; clear: both;">
+
+        <!-- Baris Judul & Tombol (Kini dikasih GAP 12px antara indikator hijau dan teks) -->
+        <div class="category-title" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 32px; width: 100%;">
+            <div style="display: flex; align-items: center; gap: 12px;"> <!-- MENAMBAHKAN GAP 12px DI SINI BREE -->
+                <div class="title-indicator"></div>
+                <h2 style="margin: 0; font-size: 20px; font-weight: 700; color: #0f172a;">Opini & Statement</h2>
+            </div>
+
+            <!-- TOMBOL REQUEST POSTING VIA WA -->
+            <a href="https://wa.me/6283159448087?text=Halo%20Admin%20MediaHub%2C%20saya%20tertarik%20untuk%20request%20posting%20opini%2Fstatement%20di%20MediaHub.%20Bagaimana%20prosedur%20dan%20ketentuannya%3F"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="btn-request-posting">
+                <span>✍️</span> Kirim Tulisan
+            </a>
+        </div>
+
+        <!-- Baris Grid Kartu -->
+        <div class="grid-opini" style="width: 100%; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; clear: both; margin-top: 20px;">
+            <div style="grid-column:1/-1; text-align:center; padding:40px; color:#64748b;">Memuat...</div>
+        </div>
+
+    </main>
+
+    <!-- 4. MODAL POPUP BACA TULISAN LENGKAP -->
+    <div id="modalBaca" class="modal">
+        <div class="modal-content">
+            <span onclick="tutupTulisan()" style="float: right; cursor: pointer; font-weight: bold; color: #94a3b8; margin-bottom: 12px;">&times; Tutup</span>
+            <div id="isiTulisanLengkap"></div>
+        </div>
+    </div>
+
+    <!-- 5. ZONE DISKUSI PUBLIK (DISQUS) -->
+    <section style="max-width: 750px; margin: 40px auto; padding: 0 24px;">
+        <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 32px;">
+            <h3 style="font-size: 18px; font-weight: 700; color: #1e293b; margin-bottom: 8px; text-align: center;">
+                Diskusi Publik
+            </h3>
+            <p style="font-size: 13px; color: #64748b; text-align: center; margin-bottom: 32px;">
+                Berikan tanggapanmu terkait opini & statement di atas.
+            </p>
+            <div id="disqus_thread"></div>
+            <script>
+                var disqus_config = function () {
+                    this.page.url = window.location.href;
+                    this.page.identifier = "opini_page";
+                };
+                (function() {
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://mediahubindonesia.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+        </div>
+    </section>
+
+    <!-- 6. FOOTER IDENTIK -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Layanan</h3>
+                <ul>
+                    <li><a href="https://rumahwebstudio.my.id/" target="_blank" rel="noopener noreferrer">Jasa Pembuatan Web</a></li>
+                    <li><a href="https://rumahwebstudio.my.id/" target="_blank" rel="noopener noreferrer">Desain UI/UX Landing Page</a></li>
+                    <li><a href="https://rumahwebstudio.my.id/" target="_blank" rel="noopener noreferrer">Optimasi Performa Web</a></li>
+                    <li><a href="https://rumahwebstudio.my.id/" target="_blank" rel="noopener noreferrer">Perawatan Website/Maintenance</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Kontak</h3>
+                <ul>
+                    <li><a href="https://wa.me/6283159448087" target="_blank" rel="noopener noreferrer">WhatsApp Bisnis</a></li>
+                    <li><a href="mailto:rumahwebstudio@gmail.com">Email RumahWeb Studio</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Media Sosial</h3>
+                <ul>
+                    <li><a href="https://instagram.com/rumahweb.id" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                    <li><a href="https://www.facebook.com/share/1EgsS9cNZ3/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 <strong>MediaHub</strong> by <a href="https://rumahwebstudio.my.id/" target="_blank" rel="noopener noreferrer" style="color: #10b981; text-decoration: none; font-weight: 700;">RumahWeb Studio</a>. Seluruh hak cipta logo milik masing-masing penerbit resmi.</p>
+        </div>
+    </footer>
+
+    <!-- 7. SCRIPT UTAMA (SUDAH MENDUKUNG BADGE DINAMIS) -->
+    <script>
+        let databaseOpiniSanity = [];
+
+        (async function loadOpini() {
+            const gridContainer = document.querySelector('.grid-opini');
+            if (!gridContainer) return;
+
+            const projectId = '95ioi1kk';
+            const dataset = 'production';
+            const apiVersion = '2021-10-21';
+
+            // Menambahkan 'tipe' ke dalam query GROQ
+            const query = `*[_type == "opini" && aktif == true] | order(tanggal desc) {
+                "id": slug.current,
+                judul,
+                tipe,
+                penulis,
+                asalKota,
+                tanggal,
+                ringkasan,
+                isiLengkap
+            }`;
+
+            const url = `https://${projectId}.api.sanity.io/v${apiVersion}/data/query/${dataset}?query=${encodeURIComponent(query)}`;
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const data = await response.json();
+
+                databaseOpiniSanity = data.result;
+
+                if (!databaseOpiniSanity || databaseOpiniSanity.length === 0) {
+                    gridContainer.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:40px; color:#64748b;">Belum ada opini atau statement warga yang diterbitkan.</div>';
+                    return;
+                }
+
+                gridContainer.innerHTML = databaseOpiniSanity.map(item => {
+                    const formatTanggal = item.tanggal ? item.tanggal : 'Baru saja';
+                    // Mengambil nilai tipe dari Sanity, kalau kosong fallback ke 'Statement'
+                    const tipeTulisan = item.tipe ? item.tipe : 'Statement';
+
+                    return `
+                        <div class="opini-card" onclick="bukaTulisan('${item.id}')" style="cursor:pointer;">
+                            <!-- BADGE SEKARANG MENGIKUTI DATA SANITY -->
+                            <div class="badge-opini">${tipeTulisan}</div>
+                            <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; line-height: 1.4; margin-bottom: 8px;">
+                                ${item.judul}
+                            </h3>
+                            <p style="font-size: 13px; color: #64748b; line-height: 1.5; margin-bottom: 12px;">
+                                ${item.ringkasan ? item.ringkasan : 'Klik untuk membaca rilis lengkap...'}
+                            </p>
+                            <div class="opini-meta" style="font-size: 12px; color: #475569;">
+                                Oleh: <strong>${item.penulis}</strong> <br>
+                                <span style="font-size: 11px; color: #94a3b8;">${formatTanggal} • ${item.asalKota || 'Nasional'}</span>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+            } catch (error) {
+                console.error('Gagal mengambil data dari Sanity:', error);
+                gridContainer.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:40px; color:#ef4444;">Gagal memuat data opini. Cek koneksi Anda.</div>';
+            }
+        })();
+
+        function bukaTulisan(slugId) {
+            const data = databaseOpiniSanity.find(opini => opini.id === slugId);
+
+            if(data) {
+                const isiTerformat = data.isiLengkap ? data.isiLengkap.replace(/\n/g, '<br>') : '';
+                const tipeTulisan = data.tipe ? data.tipe : 'Statement';
+
+                document.getElementById('isiTulisanLengkap').innerHTML = `
+                    <h2 style="font-size: 22px; font-weight: 800; line-height: 1.3; margin-bottom: 8px; color:#0f172a;">${data.judul}</h2>
+                    <p style="font-size: 12px; color: #94a3b8; margin-bottom: 20px;">Jenis: <span style="color:#10b981; font-weight:700;">${tipeTulisan}</span> | Oleh: <strong>${data.penulis} (${data.asalKota || '-'})</strong> | ${data.tanggal || ''}</p>
+                    <div style="color: #334155; font-size: 14px; line-height: 1.6;">${isiTerformat}</div>
+                    <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 24px 0;">
+                    <div style="background-color: #f8fafc; padding: 16px; border-radius: 12px; font-size: 11px; color: #64748b; font-style: italic;">
+                        <strong>Disclaimer:</strong> Segala isi ${tipeTulisan.toLowerCase()} dalam tulisan ini sepenuhnya menjadi tanggung jawab penulis, dan tidak mencerminkan pandangan dari MediaHub.
+                    </div>
+                `;
+                document.getElementById('modalBaca').style.display = "block";
+            }
+        }
+
+        function tutupTulisan() {
+            document.getElementById('modalBaca').style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('modalBaca');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
