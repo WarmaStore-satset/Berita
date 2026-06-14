@@ -1,0 +1,371 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #f8fafc;
+    color: #0f172a;
+    -webkit-font-smoothing: antialiased;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid #e2e8f0;
+    height: 70px;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: #0f172a;
+}
+
+.brand span {
+    color: #10b981;
+}
+
+.nav-info {
+    font-size: 12px;
+    color: #94a3b8;
+    font-weight: 500;
+}
+
+.hero {
+    background-color: #ffffff;
+    padding: 60px 24px 40px 24px;
+    text-align: center;
+}
+
+.hero-container {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.2;
+    margin-bottom: 16px;
+}
+
+.hero h1 span {
+    background: linear-gradient(to right, #10b981, #059669);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+    color: #64748b;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.ads-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Style Banner Iklan Mandiri RumahWeb Studio */
+.banner-iklan {
+    width: 100%;
+    max-width: 728px;
+    height: auto;
+    display: block;
+    margin: 10px auto 0 auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+}
+
+.banner-iklan:hover {
+    transform: scale(1.01);
+}
+
+.main-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px;
+}
+
+.category-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.title-indicator {
+    width: 6px;
+    height: 22px;
+    background-color: #10b981;
+    border-radius: 4px;
+}
+
+.category-title h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+@media (min-width: 768px) {
+    .grid-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .hero h1 {
+        font-size: 48px;
+    }
+}
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 32px 20px;
+    text-decoration: none;
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    transition: all 0.2s ease-in-out;
+}
+
+.logo-wrapper {
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    width: 100%;
+}
+
+.logo-wrapper img {
+    max-height: 100%;
+    max-width: 85%;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+}
+
+.grid-item span {
+    font-size: 13px;
+    font-weight: 700;
+    color: #475569;
+    transition: color 0.2s ease;
+}
+
+/* EFEK HOVER GLOBAL - SEMUA JADI HITAM PEKAT */
+.grid-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    border-color: #0f172a;
+}
+
+.grid-item:hover span {
+    color: #0f172a;
+}
+
+/* Style Footer Multi-Kolom Rata Kiri */
+.main-footer {
+    background-color: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    padding: 60px 24px 30px 24px;
+    margin-top: 40px;
+}
+
+.footer-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+@media (min-width: 768px) {
+    .footer-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.footer-col h3 {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #0f172a;
+    margin-bottom: 16px;
+}
+
+.footer-col ul {
+    list-style: none;
+}
+
+.footer-col ul li {
+    margin-bottom: 12px;
+}
+
+.footer-col ul li a {
+    font-size: 14px;
+    color: #64748b;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-col ul li a:hover {
+    color: #0f172a;
+}
+
+.footer-bottom {
+    max-width: 1100px;
+    margin: 30px auto 0 auto;
+    text-align: center;
+    font-size: 12px;
+    color: #94a3b8;
+    line-height: 1.6;
+}
+
+/* ========================================= */
+/* CSS TAMBAHAN KHUSUS HALAMAN OPINI         */
+/* ========================================= */
+.opini-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 24px;
+    text-decoration: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.opini-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    border-color: #10b981;
+}
+
+.badge-opini {
+    background-color: #e6f4ea;
+    color: #10b981;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 50px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.opini-meta {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-top: auto;
+    padding-top: 16px;
+}
+
+/* Modal Style untuk Baca Tulisan */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0; top: 0; width: 100%; height: 100%;
+    background-color: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 32px;
+    border-radius: 24px;
+    max-width: 650px;
+    width: 85%;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+/* Layout Grid Khusus Opini (Biar HP tetap 1 kolom, layar lebar 2 kolom) */
+.grid-opini {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+@media (min-width: 768px) {
+    .grid-opini {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ========================================= */
+/* TOMBOL REQUEST POSTING           */
+/* ========================================= */
+.btn-request-posting {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #10b981;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2);
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-request-posting:hover {
+    background-color: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3);
+}
+
+.btn-request-posting:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 480px) {
+    .btn-request-posting {
+        width: 100%;
+        justify-content: center;
+        padding: 12px;
+    }
+}
