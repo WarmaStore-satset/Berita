@@ -52,7 +52,6 @@
 
     </main>
 
-    <!-- 4. MODAL POPUP BACA TULISAN LENGKAP -->
     <div id="modalBaca" class="modal">
         <div class="modal-content">
             <span onclick="tutupTulisan()" style="float: right; cursor: pointer; font-weight: bold; color: #94a3b8; margin-bottom: 12px;">&times; Tutup</span>
@@ -60,7 +59,65 @@
         </div>
     </div>
 
-    <!-- 5. ZONE DISKUSI PUBLIK (DISQUS) -->
+
+<div id="modal-paket" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 9999; justify-content: center; align-items: center; padding: 15px;">
+    <div style="background: #ffffff; width: 100%; max-width: 450px; border-radius: 12px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); position: relative; font-family: sans-serif; box-sizing: border-box;">
+        
+
+        <button onclick="tutupModalPaket()" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 20px; cursor: pointer; color: #888;">✕</button>
+        <h3 style="margin-top: 0; margin-bottom: 15px; font-size: 18px; color: #333; text-align: center; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px;">Syarat & Ketentuan Kirim Tulisan</h3>
+        
+        <!-- Kotak Syarat (Bisa di-scroll internal) -->
+        <div style="max-height: 140px; overflow-y: auto; background: #f9f9f9; padding: 10px; border-radius: 6px; font-size: 13px; color: #555; line-height: 1.5; margin-bottom: 20px; border: 1px solid #eef0f2;">
+            <p style="margin-top: 0;">Sebelum mempublikasikan opini atau statement Anda di MediaHub, mohon patuhi ketentuan berikut:</p>
+            <ol style="padding-left: 20px; margin-bottom: 0;">
+                <li><strong>Karya Asli (Original):</strong> Tulisan harus murni karya sendiri, bukan hasil plagiasi atau hak cipta orang lain.</li>
+                <li><strong>Isi Bertanggung Jawab:</strong> Tidak mengandung unsur SARA, ujaran kebencian, pencemaran nama baik, atau berita hoaks.</li>
+                <li><strong>Panjang Tulisan:</strong> Panjang tulisan berkisar antara minimal 200 kata hingga <strong>maksimal 1.000 - 1.500 kata</strong>.</li>
+                <li><strong>Sistem Moderasi:</strong> Artikel akan ditinjau oleh tim admin dan diterbitkan secara <strong>Unlimited (Abadi/Selamanya)</strong> maksimal 1x24 jam setelah pembayaran sukses diverifikasi.</li>
+            </ol>
+        </div>
+
+        <!-- Judul Bagian Paket -->
+        <h4 style="margin-top: 0; margin-bottom: 10px; font-size: 14px; color: #444;">Pilih Paket Publikasi:</h4>
+        
+        <!-- Pilihan Paket Grid 2x2 (Gaya Media Berita Premium) -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
+            <!-- Paket 1 -->
+            <label style="border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; text-align: center; transition: 0.2s;" class="opsi-paket">
+                <input type="radio" name="paket_mediahub" value="3000" style="margin-bottom: 6px;" onclick="pilihPaketVisual(this)">
+                <span style="font-size: 13px; font-weight: bold; color: #333;">Paket 1</span>
+                <span style="font-size: 11px; color: #777; margin: 2px 0;">1x Post Article</span>
+                <span style="font-size: 14px; font-weight: bold; color: #007bff;">Rp3.000</span>
+            </label>
+            <!-- Paket 2 -->
+            <label style="border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; text-align: center; transition: 0.2s;" class="opsi-paket">
+                <input type="radio" name="paket_mediahub" value="5000" style="margin-bottom: 6px;" onclick="pilihPaketVisual(this)">
+                <span style="font-size: 13px; font-weight: bold; color: #333;">Paket 2</span>
+                <span style="font-size: 11px; color: #777; margin: 2px 0;">2x Post Article</span>
+                <span style="font-size: 14px; font-weight: bold; color: #007bff;">Rp5.000</span>
+            </label>
+            <!-- Paket 3 -->
+            <label style="border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; text-align: center; transition: 0.2s;" class="opsi-paket">
+                <input type="radio" name="paket_mediahub" value="7000" style="margin-bottom: 6px;" onclick="pilihPaketVisual(this)">
+                <span style="font-size: 13px; font-weight: bold; color: #333;">Paket 3</span>
+                <span style="font-size: 11px; color: #777; margin: 2px 0;">3x Post Article</span>
+                <span style="font-size: 14px; font-weight: bold; color: #007bff;">Rp7.000</span>
+            </label>
+            <!-- Paket 4 -->
+            <label style="border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; text-align: center; transition: 0.2s;" class="opsi-paket">
+                <input type="radio" name="paket_mediahub" value="10000" style="margin-bottom: 6px;" onclick="pilihPaketVisual(this)">
+                <span style="font-size: 13px; font-weight: bold; color: #333;">Paket 4</span>
+                <span style="font-size: 11px; color: #777; margin: 2px 0;">5x Post Article</span>
+                <span style="font-size: 14px; font-weight: bold; color: #007bff;">Rp10.000</span>
+            </label>
+        </div>
+
+        <!-- Tombol Konfirmasi Pembayaran -->
+        <button id="btn-proses-bayar" onclick="eksekusiPembayaranDinamis()" style="width: 100%; background: #28a745; color: white; border: none; padding: 12px; font-size: 15px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.2s;">Setuju & Lanjut Bayar QRIS</button>
+    </div>
+</div>
+    
     <section style="max-width: 750px; margin: 40px auto; padding: 0 24px;">
         <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 32px;">
             <h3 style="font-size: 18px; font-weight: 700; color: #1e293b; margin-bottom: 8px; text-align: center;">
