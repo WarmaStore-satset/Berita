@@ -1,4 +1,4 @@
-// Fungsi Helper untuk membuat HMAC-SHA256 murni di ekosistem Cloudflare
+// Fungsi Helper HMAC-SHA256 bawaan Cloudflare
 async function generateHmacSha256(message, secret) {
   const encoder = new TextEncoder();
   const keyData = encoder.encode(secret);
@@ -24,31 +24,34 @@ export async function onRequestPost(context) {
     const API_KEY = "235ededda8e44413deae7ac77fb132ca";
 
     let judulArtikel = "Opini Publik";
+    let paymentAmount = 3000; // Harga default fallback jika terjadi eror pembacaan body
+
+    // Membaca kiriman data JSON secara dinamis dari frontend
     try {
       const body = await context.request.json();
-      if (body && body.judulArtikel) judulArtikel = body.judulArtikel;
+      if (body) {
+        if (body.judulArtikel) judulArtikel = body.judulArtikel;
+        if (body.hargaPaket) paymentAmount = parseInt(body.hargaPaket); // Menerima harga paket dinamis (3k, 5k, 7k, 10k)
+      }
     } catch(e) {}
 
-    const paymentAmount = 3000; // Sesuai standarisasi nominal uji coba dokumentasi Duitku
     const merchantOrderId = "MH-" + Date.now(); 
-    const productDetails = `Publikasi Artikel: ${judulArtikel}`;
+    const productDetails = `Publikasi MediaHub - Paket Rp${paymentAmount.toLocaleString('id-ID')} (${judulArtikel})`;
 
     const email = "pembeli@mediahub.com";
     const phoneNumber = "081234567890";
 
-    // Rumus Baru sesuai Dokumentasi Juni 2026: merchantCode + merchantOrderId + paymentAmount
+    // Rumus Signature Baru: merchantCode + merchantOrderId + paymentAmount
     const stringToSign = MERCHANT_CODE + merchantOrderId + paymentAmount;
-    
-    // Generate Signature pakai HMAC-SHA256 sesuai aturan baru
     const signature = await generateHmacSha256(stringToSign, API_KEY);
 
     const payload = {
       merchantCode: MERCHANT_CODE,
-      paymentAmount: paymentAmount,
-      paymentMethod: "SP", // WAJIB DIISI: Menggunakan QRIS/E-Wallet ShopeePay Sandbox
+      paymentAmount: paymentAmount, // Dikirim akurat sesuai paket pilihan user ke Duitku
+      paymentMethod: "SP", 
       merchantOrderId: merchantOrderId,
       productDetails: productDetails,
-      customerVaName: "Pembeli MediaHub", // Parameter wajib konfirmasi bank di dokumentasi
+      customerVaName: "Pembeli MediaHub",
       email: email,
       phoneNumber: phoneNumber,
       callbackUrl: "https://mediahub-indonesia.pages.dev/callback", 
@@ -70,8 +73,7 @@ export async function onRequestPost(context) {
         headers: { "Content-Type": "application/json" }
       });
     } else {
-      // Menampilkan pesan reject asli dari sistem Duitku biar jelas
-      return new Response(JSON.stringify({ error: `Duitku Reject: ${result.statusMessage || "Gagal total"}` }), { 
+      return new Response(JSON.stringify({ error: `Duitku Reject: ${result.statusMessage || "Gagal"}` }), { 
         status: 400,
         headers: { "Content-Type": "application/json" }
       });
