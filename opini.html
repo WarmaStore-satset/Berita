@@ -227,7 +227,7 @@
 
     try {
       // Tembak file Cloudflare Functions yang kita bikin di Termux kemarin
-      const response = await fetch('/functions/buat-tagihan.js', {
+      const response = await fetch('functions/buat-tagihan.js', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ judulArtikel: 'Rilis Opini MediaHub' })
