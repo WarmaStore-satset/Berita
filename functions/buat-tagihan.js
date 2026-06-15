@@ -29,7 +29,7 @@ export async function onRequestPost(context) {
       if (body && body.judulArtikel) judulArtikel = body.judulArtikel;
     } catch(e) {}
 
-    const paymentAmount = 10000; // Sesuai standarisasi nominal uji coba dokumentasi Duitku
+    const paymentAmount = 3000; // Sesuai standarisasi nominal uji coba dokumentasi Duitku
     const merchantOrderId = "MH-" + Date.now(); 
     const productDetails = `Publikasi Artikel: ${judulArtikel}`;
 
