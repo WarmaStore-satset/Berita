@@ -24,16 +24,18 @@ export async function onRequestPost(context) {
     const API_KEY = "235ededda8e44413deae7ac77fb132ca";
 
     let judulArtikel = "Opini Publik";
-    let paymentAmount = 3000; // Harga default fallback jika terjadi eror pembacaan body
+    let paymentAmount = 3000; 
 
-    // Membaca kiriman data JSON secara dinamis dari frontend
+    // Membaca kiriman data JSON secara dinamis dari frontend dengan validasi ketat
     try {
       const body = await context.request.json();
       if (body) {
         if (body.judulArtikel) judulArtikel = body.judulArtikel;
-        if (body.hargaPaket) paymentAmount = parseInt(body.hargaPaket); // Menerima harga paket dinamis (3k, 5k, 7k, 10k)
+        if (body.hargaPaket) paymentAmount = parseInt(body.hargaPaket);
       }
-    } catch(e) {}
+    } catch(e) {
+      console.error("Gagal membaca request body JSON:", e);
+    }
 
     const merchantOrderId = "MH-" + Date.now(); 
     const productDetails = `Publikasi MediaHub - Paket Rp${paymentAmount.toLocaleString('id-ID')} (${judulArtikel})`;
@@ -41,13 +43,12 @@ export async function onRequestPost(context) {
     const email = "pembeli@mediahub.com";
     const phoneNumber = "081234567890";
 
-    // Rumus Signature Baru: merchantCode + merchantOrderId + paymentAmount
     const stringToSign = MERCHANT_CODE + merchantOrderId + paymentAmount;
     const signature = await generateHmacSha256(stringToSign, API_KEY);
 
     const payload = {
       merchantCode: MERCHANT_CODE,
-      paymentAmount: paymentAmount, // Dikirim akurat sesuai paket pilihan user ke Duitku
+      paymentAmount: paymentAmount, 
       paymentMethod: "SP", 
       merchantOrderId: merchantOrderId,
       productDetails: productDetails,
@@ -68,19 +69,20 @@ export async function onRequestPost(context) {
 
     const result = await response.json();
 
-    if (result.paymentUrl) {
+    // Pastikan mengembalikan respon berformat JSON dalam kondisi apapun agar frontend tidak crash
+    if (result && result.paymentUrl) {
       return new Response(JSON.stringify({ paymentUrl: result.paymentUrl }), {
         headers: { "Content-Type": "application/json" }
       });
     } else {
-      return new Response(JSON.stringify({ error: `Duitku Reject: ${result.statusMessage || "Gagal"}` }), { 
+      return new Response(JSON.stringify({ error: `Duitku Reject: ${result.statusMessage || "Gagal membuat link pembayaran"}` }), { 
         status: 400,
         headers: { "Content-Type": "application/json" }
       });
     }
 
   } catch (error) {
-    return new Response(JSON.stringify({ error: `Eror Server: ${error.message}` }), { 
+    return new Response(JSON.stringify({ error: `Eror Server Backend: ${error.message}` }), { 
       status: 500,
       headers: { "Content-Type": "application/json" }
     });
