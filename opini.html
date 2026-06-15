@@ -300,8 +300,7 @@
             const inputJudul = document.getElementById('judul-artikel-input')?.value || "Opini Publik Warga";
 
             try {
-                // Sesuai dengan routing Cloudflare Pages Functions milikmu
-                const response = await fetch('/functions/buat-tagihan', {
+                const response = await fetch('/buat-tagihan', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ 
