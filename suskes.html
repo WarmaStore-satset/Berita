@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran Berhasil - MediaHub</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background: #f4f7f6; }
+        .card { background: white; padding: 30px; border-radius: 10px; display: inline-block; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { color: #2ecc71; }
+        p { color: #555; }
+        .btn-wa { background: #25d366; color: white; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Bree, Pembayaran Berhasil! 🥳</h1>
+        <p>Duit 3k lu udah masuk sistem kasir otomatis MediaHub.</p>
+        <p><strong>Menghubungkan otomatis ke WhatsApp Admin dalam 3 detik...</strong></p>
+        <a id="wa-link" href="https://wa.me/6283159448087?text=Halo%20Admin%20MediaHub%2C%20saya%20sudah%20menyelesaikan%20pembayaran%20QRIS%20sebesar%20Rp3.000.%20Mohon%20proses%20posting%20opini%20saya." class="btn-wa">Klik di sini jika tidak otomatis beralih</a>
+    </div>
+
+    <script>
+        // Otomatis mengalihkan user ke WA Admin setelah 3 detik
+        setTimeout(() => {
+            const urlWa = document.getElementById('wa-link').href;
+            window.location.href = urlWa;
+        }, 3000);
+    </script>
+
+</body>
+</html>
