@@ -84,30 +84,30 @@
                 <label style="border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; text-align: center; transition: 0.2s;" class="opsi-paket">
                     <input type="radio" name="paket_mediahub" value="3000" style="margin-bottom: 6px;" onclick="pilihPaketVisual(this)">
                     <span style="font-size: 13px; font-weight: bold; color: #333;">Paket 1</span>
-                    <span style="font-size: 11px; color: #777; margin: 2px 0;">1x Post Article</span>
+                    <span style="font-size: 11px; color: #777; margin: 2px 0;">1x Post</span>
                     <span style="font-size: 14px; font-weight: bold; color: #007bff;">Rp3.000</span>
                 </label>
                 <label style="border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; text-align: center; transition: 0.2s;" class="opsi-paket">
                     <input type="radio" name="paket_mediahub" value="5000" style="margin-bottom: 6px;" onclick="pilihPaketVisual(this)">
                     <span style="font-size: 13px; font-weight: bold; color: #333;">Paket 2</span>
-                    <span style="font-size: 11px; color: #777; margin: 2px 0;">2x Post Article</span>
+                    <span style="font-size: 11px; color: #777; margin: 2px 0;">2x Post</span>
                     <span style="font-size: 14px; font-weight: bold; color: #007bff;">Rp5.000</span>
                 </label>
                 <label style="border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; text-align: center; transition: 0.2s;" class="opsi-paket">
                     <input type="radio" name="paket_mediahub" value="7000" style="margin-bottom: 6px;" onclick="pilihPaketVisual(this)">
                     <span style="font-size: 13px; font-weight: bold; color: #333;">Paket 3</span>
-                    <span style="font-size: 11px; color: #777; margin: 2px 0;">3x Post Article</span>
+                    <span style="font-size: 11px; color: #777; margin: 2px 0;">3x Post</span>
                     <span style="font-size: 14px; font-weight: bold; color: #007bff;">Rp7.000</span>
                 </label>
                 <label style="border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; text-align: center; transition: 0.2s;" class="opsi-paket">
                     <input type="radio" name="paket_mediahub" value="10000" style="margin-bottom: 6px;" onclick="pilihPaketVisual(this)">
                     <span style="font-size: 13px; font-weight: bold; color: #333;">Paket 4</span>
-                    <span style="font-size: 11px; color: #777; margin: 2px 0;">5x Post Article</span>
+                    <span style="font-size: 11px; color: #777; margin: 2px 0;">5x Post</span>
                     <span style="font-size: 14px; font-weight: bold; color: #007bff;">Rp10.000</span>
                 </label>
             </div>
 
-            <button id="btn-proses-bayar" onclick="eksekusiPembayaranDinamis()" style="width: 100%; background: #28a745; color: white; border: none; padding: 12px; font-size: 15px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.2s;">Setuju & Lanjut Bayar QRIS</button>
+            <button id="btn-proses-bayar" onclick="eksekusiPembayaranDinamis()" style="width: 100%; background: #28a745; color: white; border: none; padding: 12px; font-size: 15px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.2s;">Setuju & Lanjut Bayar</button>
         </div>
     </div>
     
@@ -238,7 +238,7 @@
                     <div style="color: #334155; font-size: 14px; line-height: 1.6;">${isiTerformat}</div>
                     <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 24px 0;">
                     <div style="background-color: #f8fafc; padding: 16px; border-radius: 12px; font-size: 11px; color: #64748b; font-style: italic;">
-                        <strong>Disclaimer:</strong> Segala isi ${tipeTulisan.toLowerCase()} dalam tulisan ini sepenuhnya menjadi tanggung jawab penulis, and tidak mencerminkan pandangan dari MediaHub.
+                        <strong>Disclaimer:</strong> Segala isi ${tipeTulisan.toLowerCase()} dalam tulisan ini sepenuhnya menjadi tanggung jawab penulis, dan tidak mencerminkan pandangan dari MediaHub.
                     </div>
                 `;
                 document.getElementById('modalBaca').style.display = "block";
@@ -286,7 +286,7 @@
 
         async function eksekusiPembayaranDinamis() {
             if (nominalTerpilih === 0) {
-                alert("Silakan pilih salah satu paket publikasi terlebih dahulu, Bree!");
+                alert("Silakan pilih salah satu paket publikasi terlebih dahulu!");
                 return;
             }
 
@@ -317,12 +317,12 @@
                     window.location.href = data.paymentUrl;
                 } else {
                     alert(data.error || "Gagal membuat tagihan pembayaran.");
-                    btn.innerText = "Setuju & Lanjut Bayar QRIS";
+                    btn.innerText = "Setuju & Lanjut Bayar";
                     btn.disabled = false;
                 }
             } catch (error) {
                 alert("Terjadi kesalahan jaringan/server: " + error.message);
-                btn.innerText = "Setuju & Lanjut Bayar QRIS";
+                btn.innerText = "Setuju & Lanjut Bayar";
                 btn.disabled = false;
             }
         }
