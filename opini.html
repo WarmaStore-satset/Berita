@@ -40,14 +40,10 @@
                 <h2 style="margin: 0; font-size: 20px; font-weight: 700; color: #0f172a;">Opini & Statement</h2>
             </div>
 
-            <!-- TOMBOL REQUEST POSTING VIA WA -->
-            <a href="https://wa.me/6283159448087?text=Halo%20Admin%20MediaHub%2C%20saya%20tertarik%20untuk%20request%20posting%20opini%2Fstatement%20di%20MediaHub.%20Bagaimana%20prosedur%20dan%20ketentuannya%3F"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="btn-request-posting">
-                <span>✍️</span> Kirim Tulisan
-            </a>
-        </div>
+       <button type="button" id="btn-bayar" class="btn-request-posting">
+       <span>✍️</span> Kirim Tulisan
+       </button>
+       <div id="pesan-status" style="margin-top: 10px; font-weight: bold;"></div>
 
         <!-- Baris Grid Kartu -->
         <div class="grid-opini" style="width: 100%; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; clear: both; margin-top: 20px;">
@@ -219,5 +215,43 @@
             }
         }
     </script>
+<script>
+  document.getElementById('btn-bayar').addEventListener('click', async () => {
+    const btn = document.getElementById('btn-bayar');
+    const statusDiv = document.getElementById('pesan-status');
+
+    // Nonaktifkan tombol saat proses
+    btn.disabled = true;
+    btn.innerHTML = "<span>⏳</span> Membuat Tagihan QRIS...";
+    statusDiv.innerText = "";
+
+    try {
+      // Tembak file Cloudflare Functions yang kita bikin di Termux kemarin
+      const response = await fetch('/functions/buat-tagihan', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ judulArtikel: 'Rilis Opini MediaHub' })
+      });
+
+      const data = await response.json();
+
+      if (data.paymentUrl) {
+        statusDiv.innerHTML = `<p style="color: green;">Tagihan berhasil dibuat! Mengalihkan ke pembayaran...</p>`;
+        // Langsung lempar user ke halaman QRIS Sandbox Duitku
+        window.location.href = data.paymentUrl;
+      } else {
+        throw new Error(data.error || 'Gagal mendapatkan link pembayaran');
+      }
+
+    } catch (error) {
+      console.error(error);
+      statusDiv.innerHTML = `<p style="color: red;">Eror: ${error.message}</p>`;
+      btn.disabled = false;
+      btn.innerHTML = "<span>✍️</span> Kirim Tulisan";
+    }
+  });
+</script>
+
+
 </body>
 </html>
