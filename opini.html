@@ -129,7 +129,6 @@
             const dataset = 'production';
             const apiVersion = '2021-10-21';
 
-            // Menambahkan 'tipe' ke dalam query GROQ
             const query = `*[_type == "opini" && aktif == true] | order(tanggal desc) {
                 "id": slug.current,
                 judul,
@@ -157,12 +156,10 @@
 
                 gridContainer.innerHTML = databaseOpiniSanity.map(item => {
                     const formatTanggal = item.tanggal ? item.tanggal : 'Baru saja';
-                    // Mengambil nilai tipe dari Sanity, kalau kosong fallback ke 'Statement'
                     const tipeTulisan = item.tipe ? item.tipe : 'Statement';
 
                     return `
                         <div class="opini-card" onclick="bukaTulisan('${item.id}')" style="cursor:pointer;">
-                            <!-- BADGE SEKARANG MENGIKUTI DATA SANITY -->
                             <div class="badge-opini">${tipeTulisan}</div>
                             <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; line-height: 1.4; margin-bottom: 8px;">
                                 ${item.judul}
@@ -197,7 +194,7 @@
                     <div style="color: #334155; font-size: 14px; line-height: 1.6;">${isiTerformat}</div>
                     <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 24px 0;">
                     <div style="background-color: #f8fafc; padding: 16px; border-radius: 12px; font-size: 11px; color: #64748b; font-style: italic;">
-                        <strong>Disclaimer:</strong> Segala isi ${tipeTulisan.toLowerCase()} dalam tulisan ini sepenuhnya menjadi tanggung jawab penulis, dan tidak mencerminkan pandangan dari MediaHub.
+                        <strong>Disclaimer:</strong> Segala isi ${tipeTulisan.toLowerCase()} dalam tulisan ini sepenuhnya menjadi tanggung jawab penulis, and tidak mencerminkan pandangan dari MediaHub.
                     </div>
                 `;
                 document.getElementById('modalBaca').style.display = "block";
@@ -220,14 +217,13 @@
     const btn = document.getElementById('btn-bayar');
     const statusDiv = document.getElementById('pesan-status');
 
-    // Nonaktifkan tombol saat proses
     btn.disabled = true;
     btn.innerHTML = "<span>⏳</span> Membuat Tagihan QRIS...";
     statusDiv.innerText = "";
 
     try {
-      // Tembak file Cloudflare Functions yang kita bikin di Termux kemarin
-      const response = await fetch('functions/buat-tagihan.js', {
+      // PERBAIKAN JALUR URL ROUTING CLOUDFLARE PAGES FUNCTIONS
+      const response = await fetch('/buat-tagihan', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ judulArtikel: 'Rilis Opini MediaHub' })
@@ -237,7 +233,6 @@
 
       if (data.paymentUrl) {
         statusDiv.innerHTML = `<p style="color: green;">Tagihan berhasil dibuat! Mengalihkan ke pembayaran...</p>`;
-        // Langsung lempar user ke halaman QRIS Sandbox Duitku
         window.location.href = data.paymentUrl;
       } else {
         throw new Error(data.error || 'Gagal mendapatkan link pembayaran');
@@ -251,7 +246,6 @@
     }
   });
 </script>
-
 
 </body>
 </html>
