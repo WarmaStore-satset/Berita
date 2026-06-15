@@ -6,10 +6,16 @@
     <title>MediaHub | Suara Publik</title>
 
     <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .opini-card {
+            -webkit-tap-highlight-color: transparent;
+            tap-highlight-color: transparent;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- 1. NAVBAR -->
     <nav class="navbar">
         <div class="navbar-container">
             <div class="brand">Media<span>Hub</span></div>
@@ -20,7 +26,6 @@
         </div>
     </nav>
 
-    <!-- 2. HERO SECTION -->
     <section class="hero">
         <div class="hero-container">
             <h1 style="font-size: 36px; font-weight: 800; color: #0f172a; margin-bottom: 16px; line-height: 1.2; text-align: center;">
@@ -30,22 +35,20 @@
         </div>
     </section>
 
-    <!-- 3. MAIN CONTENT -->
     <main class="main-content" style="max-width: 1200px; margin: 0 auto; padding: 24px; display: block; clear: both;">
 
-        <!-- Baris Judul & Tombol (Kini dikasih GAP 12px antara indikator hijau dan teks) -->
         <div class="category-title" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 32px; width: 100%;">
-            <div style="display: flex; align-items: center; gap: 12px;"> <!-- MENAMBAHKAN GAP 12px DI SINI BREE -->
+            <div style="display: flex; align-items: center; gap: 12px;">
                 <div class="title-indicator"></div>
                 <h2 style="margin: 0; font-size: 20px; font-weight: 700; color: #0f172a;">Opini & Statement</h2>
             </div>
 
-       <button type="button" id="btn-bayar" class="btn-request-posting">
-       <span>✍️</span> Kirim Tulisan
-       </button>
-       <div id="pesan-status" style="margin-top: 10px; font-weight: bold;"></div>
+           <button type="button" id="btn-bayar" class="btn-request-posting" onclick="handleKirimTulisan()">
+               <span>✍️</span> Kirim Tulisan
+           </button>
+       </div>
+       <div id="pesan-status" style="margin-top: -15px; margin-bottom: 20px; font-weight: bold; text-align: right;"></div>
 
-        <!-- Baris Grid Kartu -->
         <div class="grid-opini" style="width: 100%; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; clear: both; margin-top: 20px;">
             <div style="grid-column:1/-1; text-align:center; padding:40px; color:#64748b;">Memuat...</div>
         </div>
@@ -59,73 +62,59 @@
         </div>
     </div>
 
+    <div id="modal-paket" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 9999; justify-content: center; align-items: center; padding: 15px;">
+        <div style="background: #ffffff; width: 100%; max-width: 450px; border-radius: 12px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); position: relative; font-family: sans-serif; box-sizing: border-box;">
+            
+            <button onclick="tutupModalPaket()" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 20px; cursor: pointer; color: #888;">✕</button>
+            <h3 style="margin-top: 0; margin-bottom: 15px; font-size: 18px; color: #333; text-align: center; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px;">Syarat & Ketentuan Kirim Tulisan</h3>
+            
+            <div style="max-height: 140px; overflow-y: auto; background: #f9f9f9; padding: 10px; border-radius: 6px; font-size: 13px; color: #555; line-height: 1.5; margin-bottom: 20px; border: 1px solid #eef0f2;">
+                <p style="margin-top: 0;">Sebelum mempublikasikan opini atau statement Anda di MediaHub, mohon patuhi ketentuan berikut:</p>
+                <ol style="padding-left: 20px; margin-bottom: 0;">
+                    <li><strong>Karya Asli (Original):</strong> Tulisan harus murni karya sendiri, bukan hasil plagiasi atau hak cipta orang lain.</li>
+                    <li><strong>Isi Bertanggung Jawab:</strong> Tidak mengandung unsur SARA, ujaran kebencian, pencemaran nama baik, atau berita hoaks.</li>
+                    <li><strong>Panjang Tulisan:</strong> Panjang tulisan berkisar antara minimal 200 kata hingga <strong>maksimal 1.000 - 1.500 kata</strong>.</li>
+                    <li><strong>Sistem Moderasi:</strong> Artikel akan ditinjau oleh tim admin dan diterbitkan secara <strong>Unlimited (Abadi/Selamanya)</strong> maksimal 1x24 jam setelah pembayaran sukses diverifikasi.</li>
+                </ol>
+            </div>
 
-<div id="modal-paket" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 9999; justify-content: center; align-items: center; padding: 15px;">
-    <div style="background: #ffffff; width: 100%; max-width: 450px; border-radius: 12px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); position: relative; font-family: sans-serif; box-sizing: border-box;">
-        
+            <h4 style="margin-top: 0; margin-bottom: 10px; font-size: 14px; color: #444;">Pilih Paket Publikasi:</h4>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
+                <label style="border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; text-align: center; transition: 0.2s;" class="opsi-paket">
+                    <input type="radio" name="paket_mediahub" value="3000" style="margin-bottom: 6px;" onclick="pilihPaketVisual(this)">
+                    <span style="font-size: 13px; font-weight: bold; color: #333;">Paket 1</span>
+                    <span style="font-size: 11px; color: #777; margin: 2px 0;">1x Post Article</span>
+                    <span style="font-size: 14px; font-weight: bold; color: #007bff;">Rp3.000</span>
+                </label>
+                <label style="border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; text-align: center; transition: 0.2s;" class="opsi-paket">
+                    <input type="radio" name="paket_mediahub" value="5000" style="margin-bottom: 6px;" onclick="pilihPaketVisual(this)">
+                    <span style="font-size: 13px; font-weight: bold; color: #333;">Paket 2</span>
+                    <span style="font-size: 11px; color: #777; margin: 2px 0;">2x Post Article</span>
+                    <span style="font-size: 14px; font-weight: bold; color: #007bff;">Rp5.000</span>
+                </label>
+                <label style="border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; text-align: center; transition: 0.2s;" class="opsi-paket">
+                    <input type="radio" name="paket_mediahub" value="7000" style="margin-bottom: 6px;" onclick="pilihPaketVisual(this)">
+                    <span style="font-size: 13px; font-weight: bold; color: #333;">Paket 3</span>
+                    <span style="font-size: 11px; color: #777; margin: 2px 0;">3x Post Article</span>
+                    <span style="font-size: 14px; font-weight: bold; color: #007bff;">Rp7.000</span>
+                </label>
+                <label style="border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; text-align: center; transition: 0.2s;" class="opsi-paket">
+                    <input type="radio" name="paket_mediahub" value="10000" style="margin-bottom: 6px;" onclick="pilihPaketVisual(this)">
+                    <span style="font-size: 13px; font-weight: bold; color: #333;">Paket 4</span>
+                    <span style="font-size: 11px; color: #777; margin: 2px 0;">5x Post Article</span>
+                    <span style="font-size: 14px; font-weight: bold; color: #007bff;">Rp10.000</span>
+                </label>
+            </div>
 
-        <button onclick="tutupModalPaket()" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 20px; cursor: pointer; color: #888;">✕</button>
-        <h3 style="margin-top: 0; margin-bottom: 15px; font-size: 18px; color: #333; text-align: center; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px;">Syarat & Ketentuan Kirim Tulisan</h3>
-        
-        <!-- Kotak Syarat (Bisa di-scroll internal) -->
-        <div style="max-height: 140px; overflow-y: auto; background: #f9f9f9; padding: 10px; border-radius: 6px; font-size: 13px; color: #555; line-height: 1.5; margin-bottom: 20px; border: 1px solid #eef0f2;">
-            <p style="margin-top: 0;">Sebelum mempublikasikan opini atau statement Anda di MediaHub, mohon patuhi ketentuan berikut:</p>
-            <ol style="padding-left: 20px; margin-bottom: 0;">
-                <li><strong>Karya Asli (Original):</strong> Tulisan harus murni karya sendiri, bukan hasil plagiasi atau hak cipta orang lain.</li>
-                <li><strong>Isi Bertanggung Jawab:</strong> Tidak mengandung unsur SARA, ujaran kebencian, pencemaran nama baik, atau berita hoaks.</li>
-                <li><strong>Panjang Tulisan:</strong> Panjang tulisan berkisar antara minimal 200 kata hingga <strong>maksimal 1.000 - 1.500 kata</strong>.</li>
-                <li><strong>Sistem Moderasi:</strong> Artikel akan ditinjau oleh tim admin dan diterbitkan secara <strong>Unlimited (Abadi/Selamanya)</strong> maksimal 1x24 jam setelah pembayaran sukses diverifikasi.</li>
-            </ol>
+            <button id="btn-proses-bayar" onclick="eksekusiPembayaranDinamis()" style="width: 100%; background: #28a745; color: white; border: none; padding: 12px; font-size: 15px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.2s;">Setuju & Lanjut Bayar QRIS</button>
         </div>
-
-        <!-- Judul Bagian Paket -->
-        <h4 style="margin-top: 0; margin-bottom: 10px; font-size: 14px; color: #444;">Pilih Paket Publikasi:</h4>
-        
-        <!-- Pilihan Paket Grid 2x2 (Gaya Media Berita Premium) -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
-            <!-- Paket 1 -->
-            <label style="border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; text-align: center; transition: 0.2s;" class="opsi-paket">
-                <input type="radio" name="paket_mediahub" value="3000" style="margin-bottom: 6px;" onclick="pilihPaketVisual(this)">
-                <span style="font-size: 13px; font-weight: bold; color: #333;">Paket 1</span>
-                <span style="font-size: 11px; color: #777; margin: 2px 0;">1x Post Article</span>
-                <span style="font-size: 14px; font-weight: bold; color: #007bff;">Rp3.000</span>
-            </label>
-            <!-- Paket 2 -->
-            <label style="border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; text-align: center; transition: 0.2s;" class="opsi-paket">
-                <input type="radio" name="paket_mediahub" value="5000" style="margin-bottom: 6px;" onclick="pilihPaketVisual(this)">
-                <span style="font-size: 13px; font-weight: bold; color: #333;">Paket 2</span>
-                <span style="font-size: 11px; color: #777; margin: 2px 0;">2x Post Article</span>
-                <span style="font-size: 14px; font-weight: bold; color: #007bff;">Rp5.000</span>
-            </label>
-            <!-- Paket 3 -->
-            <label style="border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; text-align: center; transition: 0.2s;" class="opsi-paket">
-                <input type="radio" name="paket_mediahub" value="7000" style="margin-bottom: 6px;" onclick="pilihPaketVisual(this)">
-                <span style="font-size: 13px; font-weight: bold; color: #333;">Paket 3</span>
-                <span style="font-size: 11px; color: #777; margin: 2px 0;">3x Post Article</span>
-                <span style="font-size: 14px; font-weight: bold; color: #007bff;">Rp7.000</span>
-            </label>
-            <!-- Paket 4 -->
-            <label style="border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; text-align: center; transition: 0.2s;" class="opsi-paket">
-                <input type="radio" name="paket_mediahub" value="10000" style="margin-bottom: 6px;" onclick="pilihPaketVisual(this)">
-                <span style="font-size: 13px; font-weight: bold; color: #333;">Paket 4</span>
-                <span style="font-size: 11px; color: #777; margin: 2px 0;">5x Post Article</span>
-                <span style="font-size: 14px; font-weight: bold; color: #007bff;">Rp10.000</span>
-            </label>
-        </div>
-
-        <!-- Tombol Konfirmasi Pembayaran -->
-        <button id="btn-proses-bayar" onclick="eksekusiPembayaranDinamis()" style="width: 100%; background: #28a745; color: white; border: none; padding: 12px; font-size: 15px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.2s;">Setuju & Lanjut Bayar QRIS</button>
     </div>
-</div>
     
     <section style="max-width: 750px; margin: 40px auto; padding: 0 24px;">
         <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 32px;">
-            <h3 style="font-size: 18px; font-weight: 700; color: #1e293b; margin-bottom: 8px; text-align: center;">
-                Diskusi Publik
-            </h3>
-            <p style="font-size: 13px; color: #64748b; text-align: center; margin-bottom: 32px;">
-                Berikan tanggapanmu terkait opini & statement di atas.
-            </p>
+            <h3 style="font-size: 18px; font-weight: 700; color: #1e293b; margin-bottom: 8px; text-align: center;">Diskusi Publik</h3>
+            <p style="font-size: 13px; color: #64748b; text-align: center; margin-bottom: 32px;">Berikan tanggapanmu terkait opini & statement di atas.</p>
             <div id="disqus_thread"></div>
             <script>
                 var disqus_config = function () {
@@ -142,7 +131,6 @@
         </div>
     </section>
 
-    <!-- 6. FOOTER IDENTIK -->
     <footer class="main-footer">
         <div class="footer-container">
             <div class="footer-col">
@@ -174,7 +162,6 @@
         </div>
     </footer>
 
-    <!-- 7. SCRIPT UTAMA (SUDAH MENDUKUNG BADGE DINAMIS) -->
     <script>
         let databaseOpiniSanity = [];
 
@@ -269,76 +256,77 @@
             }
         }
     </script>
-<script>
 
-let nominalTerpilih = 0;
+    <script>
+        let nominalTerpilih = 0;
 
-function handleKirimTulisan() {
-    // Bukannya langsung bayar, kita munculkan dulu popup syarat & paketnya
-    document.getElementById('modal-paket').style.display = 'flex';
-}
-
-function tutupModalPaket() {
-    document.getElementById('modal-paket').style.display = 'none';
-}
-
-function pilihPaketVisual(radioInput) {
-    // Reset semua border paket ke default
-    document.querySelectorAll('.opsi-paket').forEach(el => {
-        el.style.borderColor = '#e0e0e0';
-        el.style.background = '#ffffff';
-    });
-    
-    if (radioInput.checked) {
-        const labelInduk = radioInput.parentElement;
-        labelInduk.style.borderColor = '#007bff';
-        labelInduk.style.background = '#f0f7ff';
-        nominalTerpilih = parseInt(radioInput.value);
-    }
-}
-
-async function eksekusiPembayaranDinamis() {
-    if (nominalTerpilih === 0) {
-        alert("Silakan pilih salah satu paket publikasi terlebih dahulu...");
-        return;
-    }
-
-    const btn = document.getElementById('btn-proses-bayar');
-    btn.innerText = "Memproses QRIS Duitku...";
-    btn.disabled = true;
-
-
-    const inputJudul = document.getElementById('judul-artikel-input')?.value || "Opini Publik Warga";
-
-    try {
-
-        const response = await fetch('/functions/buat-tagihan', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-                judulArtikel: inputJudul,
-                hargaPaket: nominalTerpilih 
-            })
-        });
-
-        const data = await response.json();
-
-        if (data.paymentUrl) {
-
-            window.location.href = data.paymentUrl;
-        } else {
-            alert(data.error || "Gagal membuat tagihan pembayaran.");
-            btn.innerText = "Setuju & Lanjut Bayar QRIS";
-            btn.disabled = false;
+        function handleKirimTulisan() {
+            // Membuka popup paket
+            document.getElementById('modal-paket').style.display = 'flex';
         }
-    } catch (error) {
-        alert("Terjadi kesalahan jaringan/server: " + error.message);
-        btn.innerText = "Setuju & Lanjut Bayar QRIS";
-        btn.disabled = false;
-    }
-}
-    
-</script>
+
+        function tutupModalPaket() {
+            document.getElementById('modal-paket').style.display = 'none';
+        }
+
+        function pilihPaketVisual(radioInput) {
+            // Reset semua border paket ke default
+            document.querySelectorAll('.opsi-paket').forEach(el => {
+                el.style.borderColor = '#e0e0e0';
+                el.style.background = '#ffffff';
+            });
+            
+            if (radioInput.checked) {
+                const labelInduk = radioInput.parentElement;
+                labelInduk.style.borderColor = '#007bff';
+                labelInduk.style.background = '#f0f7ff';
+                nominalTerpilih = parseInt(radioInput.value);
+            }
+        }
+
+        async function eksekusiPembayaranDinamis() {
+            if (nominalTerpilih === 0) {
+                alert("Silakan pilih salah satu paket publikasi terlebih dahulu, Bree!");
+                return;
+            }
+
+            const btn = document.getElementById('btn-proses-bayar');
+            const statusDiv = document.getElementById('pesan-status');
+            
+            btn.innerText = "Memproses QRIS Duitku...";
+            btn.disabled = true;
+            statusDiv.innerText = "";
+
+            const inputJudul = document.getElementById('judul-artikel-input')?.value || "Opini Publik Warga";
+
+            try {
+                // Sesuai dengan routing Cloudflare Pages Functions milikmu
+                const response = await fetch('/functions/buat-tagihan', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        judulArtikel: inputJudul,
+                        hargaPaket: nominalTerpilih 
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.paymentUrl) {
+                    statusDiv.innerHTML = `<p style="color: green; text-align: center;">Tagihan berhasil dibuat! Mengalihkan...</p>`;
+                    window.location.href = data.paymentUrl;
+                } else {
+                    alert(data.error || "Gagal membuat tagihan pembayaran.");
+                    btn.innerText = "Setuju & Lanjut Bayar QRIS";
+                    btn.disabled = false;
+                }
+            } catch (error) {
+                alert("Terjadi kesalahan jaringan/server: " + error.message);
+                btn.innerText = "Setuju & Lanjut Bayar QRIS";
+                btn.disabled = false;
+            }
+        }
+    </script>
 
 </body>
 </html>
