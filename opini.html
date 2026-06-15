@@ -270,38 +270,74 @@
         }
     </script>
 <script>
-  document.getElementById('btn-bayar').addEventListener('click', async () => {
-    const btn = document.getElementById('btn-bayar');
-    const statusDiv = document.getElementById('pesan-status');
 
+let nominalTerpilih = 0;
+
+function handleKirimTulisan() {
+    // Bukannya langsung bayar, kita munculkan dulu popup syarat & paketnya
+    document.getElementById('modal-paket').style.display = 'flex';
+}
+
+function tutupModalPaket() {
+    document.getElementById('modal-paket').style.display = 'none';
+}
+
+function pilihPaketVisual(radioInput) {
+    // Reset semua border paket ke default
+    document.querySelectorAll('.opsi-paket').forEach(el => {
+        el.style.borderColor = '#e0e0e0';
+        el.style.background = '#ffffff';
+    });
+    
+    if (radioInput.checked) {
+        const labelInduk = radioInput.parentElement;
+        labelInduk.style.borderColor = '#007bff';
+        labelInduk.style.background = '#f0f7ff';
+        nominalTerpilih = parseInt(radioInput.value);
+    }
+}
+
+async function eksekusiPembayaranDinamis() {
+    if (nominalTerpilih === 0) {
+        alert("Silakan pilih salah satu paket publikasi terlebih dahulu...");
+        return;
+    }
+
+    const btn = document.getElementById('btn-proses-bayar');
+    btn.innerText = "Memproses QRIS Duitku...";
     btn.disabled = true;
-    btn.innerHTML = "<span>⏳</span> Membuat Tagihan QRIS...";
-    statusDiv.innerText = "";
+
+
+    const inputJudul = document.getElementById('judul-artikel-input')?.value || "Opini Publik Warga";
 
     try {
-      // PERBAIKAN JALUR URL ROUTING CLOUDFLARE PAGES FUNCTIONS
-      const response = await fetch('/buat-tagihan', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ judulArtikel: 'Rilis Opini MediaHub' })
-      });
 
-      const data = await response.json();
+        const response = await fetch('/functions/buat-tagihan', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                judulArtikel: inputJudul,
+                hargaPaket: nominalTerpilih 
+            })
+        });
 
-      if (data.paymentUrl) {
-        statusDiv.innerHTML = `<p style="color: green;">Tagihan berhasil dibuat! Mengalihkan ke pembayaran...</p>`;
-        window.location.href = data.paymentUrl;
-      } else {
-        throw new Error(data.error || 'Gagal mendapatkan link pembayaran');
-      }
+        const data = await response.json();
 
+        if (data.paymentUrl) {
+
+            window.location.href = data.paymentUrl;
+        } else {
+            alert(data.error || "Gagal membuat tagihan pembayaran.");
+            btn.innerText = "Setuju & Lanjut Bayar QRIS";
+            btn.disabled = false;
+        }
     } catch (error) {
-      console.error(error);
-      statusDiv.innerHTML = `<p style="color: red;">Eror: ${error.message}</p>`;
-      btn.disabled = false;
-      btn.innerHTML = "<span>✍️</span> Kirim Tulisan";
+        alert("Terjadi kesalahan jaringan/server: " + error.message);
+        btn.innerText = "Setuju & Lanjut Bayar QRIS";
+        btn.disabled = false;
     }
-  });
+}
+    
 </script>
 
 </body>
