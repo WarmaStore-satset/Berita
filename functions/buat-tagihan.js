@@ -19,6 +19,9 @@ async function generateHmacSha256(message, secret) {
 }
 
 export async function onRequestPost(context) {
+  // Set HEADERS standar JSON respon agar frontend tidak mengira respon kosong
+  const jsonHeaders = { "Content-Type": "application/json" };
+
   try {
     const MERCHANT_CODE = "DS31775";
     const API_KEY = "235ededda8e44413deae7ac77fb132ca";
@@ -26,15 +29,16 @@ export async function onRequestPost(context) {
     let judulArtikel = "Opini Publik";
     let paymentAmount = 3000; 
 
-    // Membaca kiriman data JSON secara dinamis dari frontend dengan validasi ketat
+    // Proteksi ekstra pembacaan JSON body agar aman di ekosistem Cloudflare
     try {
-      const body = await context.request.json();
+      const clonedRequest = context.request.clone();
+      const body = await clonedRequest.json();
       if (body) {
         if (body.judulArtikel) judulArtikel = body.judulArtikel;
         if (body.hargaPaket) paymentAmount = parseInt(body.hargaPaket);
       }
     } catch(e) {
-      console.error("Gagal membaca request body JSON:", e);
+      console.error("Sistem membaca request body kosong, menggunakan default paket.", e);
     }
 
     const merchantOrderId = "MH-" + Date.now(); 
@@ -67,24 +71,29 @@ export async function onRequestPost(context) {
       body: JSON.stringify(payload)
     });
 
+    // Jika response API Duitku bermasalah / offline
+    if (!response.ok) {
+      const errText = await response.text();
+      return new Response(JSON.stringify({ error: `Duitku API Eror: ${response.status} - ${errText}` }), { status: 500, headers: jsonHeaders });
+    }
+
     const result = await response.json();
 
-    // Pastikan mengembalikan respon berformat JSON dalam kondisi apapun agar frontend tidak crash
     if (result && result.paymentUrl) {
       return new Response(JSON.stringify({ paymentUrl: result.paymentUrl }), {
-        headers: { "Content-Type": "application/json" }
+        headers: jsonHeaders
       });
     } else {
-      return new Response(JSON.stringify({ error: `Duitku Reject: ${result.statusMessage || "Gagal membuat link pembayaran"}` }), { 
+      return new Response(JSON.stringify({ error: `Duitku Reject: ${result.statusMessage || "Gagal memperoleh link payment"}` }), { 
         status: 400,
-        headers: { "Content-Type": "application/json" }
+        headers: jsonHeaders
       });
     }
 
   } catch (error) {
-    return new Response(JSON.stringify({ error: `Eror Server Backend: ${error.message}` }), { 
+    return new Response(JSON.stringify({ error: `Eror Sistem Server: ${error.message}` }), { 
       status: 500,
-      headers: { "Content-Type": "application/json" }
+      headers: jsonHeaders
     });
   }
 }
