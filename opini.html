@@ -205,11 +205,34 @@
             }
         })();
 
-        function bukaTulisan(slugId) {
+                function bukaTulisan(slugId) {
             const data = databaseOpiniSanity.find(opini => opini.id === slugId);
 
             if(data) {
-                const isiTerformat = data.isiLengkap ? data.isiLengkap.replace(/\n/g, '<br>') : '';
+                let isiTerformat = '';
+                
+                if (data.isiLengkap && Array.isArray(data.isiLengkap)) {
+                    data.isiLengkap.forEach(block => {
+                        if (block._type === 'block' && block.children) {
+                            let teksParagraf = '';
+                            
+                            block.children.forEach(span => {
+                                let teksSpan = span.text || '';
+                                
+                                if (span.marks && span.marks.length > 0) {
+                                    if (span.marks.includes('strong')) teksSpan = `<strong>${teksSpan}</strong>`;
+                                    if (span.marks.includes('em')) teksSpan = `<em>${teksSpan}</em>`;
+                                }
+                                teksParagraf += teksSpan;
+                            });
+                            
+                            isiTerformat += `<p style="margin-bottom: 14px;">${teksParagraf}</p>`;
+                        }
+                    });
+                } else {
+                    isiTerformat = '<p style="color:#64748b; font-style:italic;">Belum ada isi tulisan.</p>';
+                }
+
                 const tipeTulisan = data.tipe ? data.tipe : 'Statement';
 
                 document.getElementById('isiTulisanLengkap').innerHTML = `
@@ -223,7 +246,7 @@
                 `;
                 document.getElementById('modalBaca').style.display = "block";
             }
-        }
+                }
 
         function tutupTulisan() {
             document.getElementById('modalBaca').style.display = "none";
